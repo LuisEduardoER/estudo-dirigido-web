@@ -1,0 +1,62 @@
+<html !DOCTYPE>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link type="text/css" rel="stylesheet" href="master.css"></link>
+	<link type="text/css" rel="stylesheet" href="cars.css"></link>
+		
+	<script type="text/javascript" src="jquery-2.1.0.min.js"></script>	
+	<script type="text/javascript" src="classes.js"></script>	
+</head>
+<body>
+	<article>
+		<header>
+			<h1>CADASTRO DE CARROS</h1>
+		</header>
+		<section>
+			<div class="add-region">
+				<h3>Adicionar Carro</h3>				
+				<div>
+					<input id="txt-model" type="text" placeholder="Modelo" />
+					<input id="txt-year" type="text" placeholder="Ano" />
+					<input id="txt-register" type="text" placeholder="Placa" />
+					<span id="btn-insert-car" class="button">Salvar</span>					
+				</div>
+			</div>
+			<div class="filter-region">
+				<h3>Filtro</h3>
+				<div>
+					<span id="btn-filter-all" name="all" class="button filter activeFilter">Todos</span>
+					<span id="btn-filter-available" name="available" class="button filter">Disponíveis</span>
+					<span id="btn-filter-rent" name="rent" class="button filter">Alugados</span>
+				</div>
+			</div>
+		</section>
+		<section class="grid-container">			
+			<table id="cars-grid">
+				<tr class="grid-header">
+					<th class="col-2"><p>Modelo</p></th>
+					<th class="col-1"><p>Ano</p></th>
+					<th class="col-1"><p>Placa</p></th>
+					<th class="col-1"><p>Quilometragem</p></th>
+					<th class="col-1"><p>Status</p></th>
+					<th class="col-1"><p>Remover</p></th>
+				</tr>				
+			</table>
+			<p class="no-register">Sem registros</p>
+		</section>
+	</article>
+
+	<div id="confirmation-delete" class="modalDialog">
+		<div>				
+			<!-- <a href="#close" title="Fechar" class="close">X</a> -->
+			<h3>Confirmação</h3>
+			<p>Tem certeza que deseja remover este carro ?</p>
+			<span id="btn-yes" class="button">Sim</span>
+			<span id="btn-no" class="button">Não</span>
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="master.js"></script>
+	<script type="text/javascript" src="cars.js"></script>
+</body>
+</html>
