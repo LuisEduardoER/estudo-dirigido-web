@@ -1,0 +1,106 @@
+<html !DOCTYPE>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link type="text/css" rel="stylesheet" href="master.css"></link>
+	<link type="text/css" rel="stylesheet" href="cars.css"></link>
+		
+	<script type="text/javascript" src="jquery-2.1.0.min.js"></script>	
+	<script type="text/javascript" src="classes.js"></script>	
+</head>
+<body>
+	<article>
+		<header>
+			<h1>CADASTRO DE CARROS</h1>
+		</header>
+		<section>
+			<div class="add-region">
+				<h3>Adicionar Carro</h3>				
+				<div>
+					<input id="txt-model" type="text" placeholder="Modelo" />
+					<input id="txt-year" type="text" placeholder="Ano" />
+					<input id="txt-register" type="text" placeholder="Placa" />
+					<span id="btn-insert-car" class="button">Salvar</span>					
+				</div>
+			</div>
+			<div class="filter-region">
+				<h3>Filtro</h3>
+				<div>
+					<span id="btn-filter-all" name="all" class="button filter activeFilter">Todos</span>
+					<span id="btn-filter-available" name="available" class="button filter">Disponíveis</span>
+					<span id="btn-filter-rent" name="rent" class="button filter">Alugados</span>
+				</div>
+			</div>
+		</section>
+		<section class="grid-container">			
+			<table id="cars-grid">
+				<tr class="grid-header">
+					<th class="col-2"><p>Modelo</p></th>
+					<th class="col-1"><p>Ano</p></th>
+					<th class="col-1"><p>Placa</p></th>
+					<th class="col-1"><p>Quilometragem</p></th>
+					<th class="col-1"><p>Status</p></th>
+					<th class="col-1"><p>Remover</p></th>
+				</tr>				
+			</table>
+			<p class="no-register">Sem registros</p>
+		</section>
+	</article>
+
+	<div id="confirmation-delete" class="modalDialog">
+		<div>				
+			<!-- <a href="#close" title="Fechar" class="close">X</a> -->
+			<h3>Confirmação</h3>
+			<p>Tem certeza que deseja remover este carro ?</p>
+			<div class="container">
+				<div class="row">					
+					<span name="btn-no" class="button">Não</span>
+					<span name="btn-yes" class="button">Sim</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div id="dialog-rent" class="modalDialog">
+		<div>				
+			<h3>Aluguel de Carro</h3>
+			<div class="container">
+				<div class="column">
+					<div class="row"><label>Modelo</label></div>
+					<div class="row"><p id="rent-model"></p></div>													
+				</div>
+				<div class="column">
+					<div class="row"><label>Ano</label></div>
+					<div class="row"><p id="rent-year"></p></div>					
+				</div>
+				<div class="column">
+					<div class="row"><label>Placa</label></div>
+					<div class="row"><p id="rent-register"></p></div>
+				</div>
+			</div>
+			<br />
+			<div class="container">
+				<div class="column">
+					<div class="row"><label>Cliente</label></div>
+					<select id="sel-rent">
+						<option value="0">Selecione um locatário...</option>
+					</select>													
+				</div>
+				<div class="column">
+					<div class="row"><label>Devolução</label></div>
+					<input id="rent-days" type="text" placeholder="Em dias"></input>
+				</div>
+			</div>	
+			<p id="rent-message" class="dialog-message"></p>
+			<div class="container">
+				<div class="row">					
+					<span name="btn-no" class="button">Não</span>
+					<span name="btn-yes" class="button">Sim</span>
+				</div>
+			</div>			
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="master.js"></script>
+	<script type="text/javascript" src="cars.js"></script>
+</body>
+</html>
