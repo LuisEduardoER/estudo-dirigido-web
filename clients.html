@@ -1,0 +1,60 @@
+<html !DOCTYPE>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link type="text/css" rel="stylesheet" href="master.css"></link>
+	<link type="text/css" rel="stylesheet" href="clients.css"></link>
+		
+	<script type="text/javascript" src="jquery-2.1.0.min.js"></script>	
+	<script type="text/javascript" src="classes.js"></script>	
+</head>
+<body>
+	<article>
+		<header>
+			<h1>CADASTRO DE CLIENTES</h1>
+		</header>
+		<section>
+			<div class="add-region">
+				<h3>Adicionar Cliente</h3>				
+				<div class="input-area">
+					<input id="txt-name" type="text" placeholder="Nome" />
+					<input id="txt-number" type="text" placeholder="CPF" />
+					<div class="drag-box input-area">
+						<div>
+							<span id="drag-add"></span>
+							<img id="drag-img"></img>
+						</div>
+					</div>
+					<input id="input-cnh" type="file" onchange="onFileSelected(event)" />
+					<!-- <div id="photo" class="drag-box" ondrop="drop(event)" ondragover="allowDrop(event)">
+						<div>Drag and drop a photo</div>
+					</div> -->
+					<span id="btn-insert-client" class="button">Salvar</span>					
+				</div>
+			</div>			
+		</section>
+		<section class="grid-container">			
+			<table id="clients-grid">
+				<tr class="grid-header">
+					<th class="col-2"><p>Nome</p></th>
+					<th class="col-1"><p>CPF</p></th>
+					<th class="col-1"><p>CNH</p></th>
+					<th class="col-1"><p>Remover</p></th>
+				</tr>				
+			</table>
+			<p class="no-register">Sem registros</p>
+		</section>
+	</article>
+
+	<div id="confirmation-delete" class="modalDialog">
+		<div>				
+			<h3>Confirmação</h3>
+			<p>Tem certeza que deseja remover este cliente?</p>
+			<span id="btn-yes" class="button">Sim</span>
+			<span id="btn-no" class="button">Não</span>
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="master.js"></script>
+	<script type="text/javascript" src="clients.js"></script>
+</body>
+<html>
