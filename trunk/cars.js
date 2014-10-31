@@ -1,8 +1,11 @@
 var currentButtonId;
 var carRepository;
+var rentRepository;
+var hasErrors = false;
 
 $(document).ready(function () {	
 	carRepository = new CarRepository();
+	rentRepository = new RentRepository();
 	
 	//Carregar todos os carros do Storage.
 	loadCars('all');
@@ -51,7 +54,7 @@ function deleteCar(carId) {
 }
 
 function rentCar(carId) {
-	var hasErrors = false;
+	hasErrors = false;
 	var message = '';
 	
 	var clientId = $('#sel-rent').val();
@@ -76,16 +79,53 @@ function rentCar(carId) {
 		$("#rent-message").show();
 	}
 	else {
-		var rent = new Rent(carId, clientId, rentDate, devolutionDate, startMile);
-		var rentRepository = new RentRepository();
+		var rent = new Rent(carId, clientId, rentDate, devolutionDate, startMile);		
 		rentRepository.insert(rent);
 		
 		carRepository.rent(carId);
+		
+		var filter = $('.activeFilter').attr('name');
+		loadCars(filter);
 	}	
 }
 
 function returnCar(carId) {
-	console.log('Devolver carro: '+ carId);
+	hasErrors = false;
+	var message = '';
+	var endMile = $('#return-endMile').val();
+	var newestRent;
+	
+	if(endMile == '') {
+		hasErrors = true;
+		message = 'A quilometragem final deve ser informada.';
+	}
+	
+	if(hasErrors) {
+		$("#return-message").text(message);
+		$("#return-message").show();
+		$('#return-endMile').focus();
+	}
+	else {
+		var rentHash = rentRepository.getAll();	
+		var rents = rentHash.hash;	
+		if(rents != undefined) {
+			$.each(rents, function(id, rent) {
+				if(rent.carId == carId && (rent.endMile == rent.startMile)) {
+					newestRent = rent;
+				}
+			}); 
+		}
+		
+		//Atualizar valores:
+		newestRent.__proto__ = Rent.prototype;
+		newestRent.setEndMile(endMile);
+		rentRepository.insert(newestRent);
+		
+		carRepository.returnCar(carId, endMile);
+		
+		var filter = $('.activeFilter').attr('name');
+		loadCars(filter);
+	}
 }
 
 function fillRentDialog(carId) {
@@ -102,6 +142,12 @@ function fillRentDialog(carId) {
 			$('#sel-rent').append("<option value='"+ client.number +"'>"+ client.name +"</option>");			
 		}); 
 	}	
+}
+
+function fillReturnDialog(carId) {
+	$('#return-model').text($('#model_'+carId).text());
+	$('#return-year').text($('#year_'+carId).text());
+	$('#return-register').text($('#reg_'+carId).text());
 }
 
 //EVENTOS
@@ -141,7 +187,9 @@ $('#cars-grid').on('click', '.grid-button', function(e) {
 		var carId = id.replace('rent_','');
 		
 		if(onRent == "true")  {				
-			returnCar(carId);			
+			//Preenchendo os campos da dialog com as informações do carro.						
+			fillReturnDialog(carId);
+			openModal('#dialog-return');		
 		}
 		else {
 			//Preenchendo os campos da dialog com as informações do carro.						
@@ -170,8 +218,20 @@ $('.filter-region').on('click', '.button', function(e) {
 $("#dialog-rent span[name='btn-yes']").click( function () {
 	var carId = $('#rent-register').text();
 	rentCar(carId);
+	
+	if(!hasErrors) {
+		closeModal('#dialog-rent');
+		$('#sel-rent').val(0);
+		$('#sel-rent-days').val('');
+	}
+});
+
+$("#dialog-return span[name='btn-yes']").click( function () {
+	var carId = $('#return-register').text();
+	returnCar(carId);
 		
-	closeModal('#dialog-rent');
-	$('#sel-rent').val(0);
-	$('#sel-rent-days').val('');
+	if(!hasErrors) {
+		closeModal('#dialog-return');
+		$('#return-endMile').val('');
+	}
 });

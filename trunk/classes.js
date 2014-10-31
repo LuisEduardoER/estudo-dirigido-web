@@ -64,6 +64,12 @@ CarRepository.prototype.rent = function(carId) {
 	car.setOnRent(true);
 	this.insert(car);
 }
+CarRepository.prototype.returnCar = function(carId, mile) {
+	var car = this.get(carId);
+	car.setMile(mile);
+	car.setOnRent(false);
+	this.insert(car);
+}
 
 //CLIENTE
 var Client = function(name, number, cnh) {
@@ -123,7 +129,8 @@ var Rent = function(carId, clientId, rentDate, devolutionDate, startMile) {
 	this.setClientId(clientId);         
 	this.setRentDate(rentDate);  
 	this.setDevolutionDate(devolutionDate);
-	this.setStartMile(startMile);		
+	this.setStartMile(startMile);
+	this.setEndMile(startMile);
 }
 Rent.prototype.setCarId = function(carId) {
 	this.carId = carId;
