@@ -1,6 +1,7 @@
 <html !DOCTYPE>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link type="text/css" rel="stylesheet" href="font-awesome/css/font-awesome.min.css"></link>
 	<link type="text/css" rel="stylesheet" href="master.css"></link>
 	<link type="text/css" rel="stylesheet" href="clients.css"></link>
 		
@@ -8,9 +9,25 @@
 	<script type="text/javascript" src="classes.js"></script>	
 </head>
 <body>
-	<header>
-	
-	</header>
+	<nav class="container">
+		<div class="row">
+			<div class="columm menu-company">
+				<div class="row">
+					<i class="fa fa-car column"></i>
+					<h1 class="columm">Líbero Rent a Car</h1>
+				</div>
+			</div>
+			<div class="columm">
+				<a class="menu-link row" href="#"><h1>BACKUP</h1> </a> 
+			</div>
+			<div class="columm">
+				<a class="row menu-link" href="clients.html"><h1>CLIENTES</h1></a>
+			</div>
+			<div class="columm">
+				<a class="row menu-link" href="cars.html"><h1>CARROS</h1></a>
+			</div>
+		</div>
+	</nav>
 	<article>
 		<section class="page-title">
 			<h1>CADASTRO DE CLIENTES</h1>
@@ -23,14 +40,11 @@
 					<input id="txt-number" type="text" placeholder="CPF" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"/>
 					<div class="drag-box input-area">
 						<div>
-							<span id="drag-add"></span>
+							<i id="drag-add" class="fa fa-plus-circle drag-box-add"></i>
 							<img id="drag-img"></img>
 						</div>
 					</div>
 					<input id="input-cnh" type="file" onchange="onFileSelected(event)" />
-					<!-- <div id="photo" class="drag-box" ondrop="drop(event)" ondragover="allowDrop(event)">
-						<div>Drag and drop a photo</div>
-					</div> -->
 					<span id="btn-insert-client" class="button">Salvar</span>					
 				</div>
 			</div>			
