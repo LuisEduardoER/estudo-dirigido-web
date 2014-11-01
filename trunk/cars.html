@@ -1,6 +1,6 @@
 <html !DOCTYPE>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="UTF-8">
 	<link type="text/css" rel="stylesheet" href="master.css"></link>
 	<link type="text/css" rel="stylesheet" href="cars.css"></link>
 		
@@ -16,9 +16,9 @@
 			<div class="add-region">
 				<h3>Adicionar Carro</h3>				
 				<div>
-					<input id="txt-model" type="text" placeholder="Modelo" />
-					<input id="txt-year" type="text" placeholder="Ano" />
-					<input id="txt-register" type="text" placeholder="Placa" />
+					<input id="txt-model" type="text" placeholder="Modelo" pattern="[A-Za-z]+"/>
+					<input id="txt-year" type="text" placeholder="Ano" pattern="\d{4}"/>
+					<input id="txt-register" type="text" placeholder="Placa" pattern="[A-Z]{3}-\d{4}"/>
 					<span id="btn-insert-car" class="button">Salvar</span>					
 				</div>
 			</div>
