@@ -2,7 +2,7 @@ $(document).ready(function () {
 
 });
 
-$("span[name='btn-no']").click(function () {
+$(".modalDialog span[name='btn-no']").click(function () {
 	closeModal('.modalDialog');	
 	$('.dialog-message').text('');
 	$('.dialog-message').hide();

@@ -46,7 +46,7 @@ function deleteClient(clientId) {
 }
 
 //EVENTOS
-$('#btn-yes').click(function () {
+$("#confirmation-delete span[name='btn-yes']").click(function () {
 	closeModal('#confirmation-delete');
 	 
 	var clientId = currentButtonId.replace('del_','');
