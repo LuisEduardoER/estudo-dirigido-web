@@ -38,7 +38,7 @@ function addCarToGrid(car) {
 		"<td><p id='reg_"+ car.register +"'>"+ car.register +"</p></td>" +
 		"<td><p id='mile_"+ car.register +"'>"+ car.mile +"</p></td>" +
 		"<td><span id='rent_"+ car.register +"' name='status' value='"+ car.onRent +"' class='grid-button'>"+ status +"</span></td>" +
-		"<td><span id='del_"+ car.register +"' name='delete' class='grid-button'>X</span></td>" +
+		"<td><span id='del_"+ car.register +"' name='delete' class='grid-button fa fa-close'></span></td>" +
 	"</tr>";
 	
 	//Adicionando a linha na grid.

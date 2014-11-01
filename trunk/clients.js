@@ -29,8 +29,8 @@ function addClientToGrid(client) {
 	var row = "<tr id='row_"+ client.number +"' class='grid-row'>" +
 		"<td><p>"+ client.name +"</p></td>" +
 		"<td><p>"+ client.number +"</p></td>" +
-		"<td><a href='"+ client.cnh +"' target='_blank'>Visualizar</a></td>" +
-		"<td><span id='del_"+ client.number +"' name='delete' class='grid-button'>X</span></td>" +
+		"<td><a title='Visualizar' class='grid-link' href='"+ client.cnh +"' target='_blank'><i class='fa fa-picture-o'></i></a></td>" +
+		"<td><span id='del_"+ client.number +"' name='delete' class='grid-button fa fa-close'></span></td>" +
 	"</tr>";
 	
 	//Adicionando a linha na grid.
@@ -104,14 +104,12 @@ $(".drag-box").on({
 		
 		if(image.attr('src') == undefined || image.attr('src') == '') {		
 			$('.drag-box div').addClass('drag-box-area');
-			$('#drag-add').addClass('drag-box-add');
-			$('#drag-add').text('+');
+			$('#drag-add').css('display','table-cell');
 		}
     },
     mouseleave: function () {
         $('.drag-box div').removeClass('drag-box-area');
-		$('#drag-add').text('');
-		$('#drag-add').removeClass('drag-box-add');
+		$('#drag-add').hide();
     }
 });
 
