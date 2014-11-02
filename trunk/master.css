@@ -48,11 +48,11 @@ nav a:hover   {color:#2c3e50; background-color: #fff}
 	font-style: normal !important;
 }
 
-article
+article:not(.art-maintenance)
 {
 	margin: 30px;
 	border: solid 1px;
-	height: 80%;
+	height: auto;
 	width: auto;
 }
 
@@ -333,3 +333,33 @@ td {
 	text-align: center;	
 	color: #2c3e50;
 }
+
+sup {
+	font-size: 12pt;
+}
+
+.sec-maintenance{	
+	color: #2c3e50;
+	margin: 5% auto;
+    padding: 5px 20px 13px;
+    position: relative;
+    width: 400px;
+}
+
+.sec-maintenance i{
+	font-size: 150pt;
+	color: #DEAD37;
+}
+
+.sec-maintenance h1{
+	font-size: 35pt;
+}
+
+.art-maintenance {
+	text-align: center;
+}
+
+#master-grid  i{
+	color: #2c3e50;
+	cursor: pointer;
+}	
