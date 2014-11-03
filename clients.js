@@ -55,24 +55,56 @@ $("#confirmation-delete span[name='btn-yes']").click(function () {
 });
 
 $('#btn-insert-client').click(function () {	
+	//Limpa erros
+	$('#dialog-validation-info ul li').remove();
+	
 	//Inserindo um novo carro no Storage.
 	var name = $('#txt-name').val();
 	var number = $('#txt-number').val();
 	var cnh = $('#drag-img').attr('src');
-
-	var client = new Client(name, number, cnh);
 	
-	clientRepository.insert(client);
-	client = clientRepository.get(client.number);
+	//validando dados
 	
-	addClientToGrid(client);
+	var re = /^[A-Za-z\s]+$/;
+	var str = {};
 	
-	$('#txt-name').val('');
-	$('#txt-number').val('');
-	$('#drag-img').attr('src','');	
-	$('#drag-img').hide();
-	$('#input-cnh').val('');
+	if (!re.test(name)) {
+		str[0] = "Nome inválido. Apenas letras são permitidas";
+	}
+	re = /\d{11}/;
+	if (!re.test(number)) {
+		str[1] = "CPF inválido. São necessários 11 dígitos.";
+	}
+	if ($.isEmptyObject(cnh)) {
+		str[2] = "CNH não enviada.";
+	}
+	
+	if ($.isEmptyObject(str)) {
+		var client = new Client(name, number, cnh);
+		
+		clientRepository.insert(client);
+		client = clientRepository.get(client.number);
+		
+		addClientToGrid(client);
+		
+		$('#txt-name').val('');
+		$('#txt-number').val('');
+		$('#drag-img').attr('src','');	
+		$('#drag-img').hide();
+		$('#input-cnh').val('');
+	} else {
+		addValidationError(str);
+	}
+	
 });
+
+function addValidationError(str) {
+$.each(str, function(id, error) {
+   $('#dialog-validation-info ul').append("<li>"+ error +"</li>");
+  });
+  
+openModal('#dialog-validation-info');
+}
 
 // Disparado quando algum botão da grid for pressionado.
 $('#clients-grid').on('click', '.grid-button', function(e) {
