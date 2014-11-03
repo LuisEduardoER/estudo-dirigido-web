@@ -164,6 +164,20 @@ $('#btn-insert-car').click(function () {
 	var model = $('#txt-model').val();
 	var year = $('#txt-year').val();
 	var register = $('#txt-register').val();
+	
+	var re = /^\d{4}$/;
+	var str = "";
+	
+	if (!re.test(year)){
+		str+="O ano precisa conter 4 números\n";
+	}
+	re = /[A-Z]{3}\d{4}/;
+	if (!re.test(register)) {
+		str+="A placa precisa conter 3 letras e 4 números";
+	}
+	
+	console.log(str);
+	
 
 	var car = new Car(model, year, register);
 	
