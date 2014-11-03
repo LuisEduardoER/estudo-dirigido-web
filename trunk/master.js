@@ -1,5 +1,7 @@
-$(document).ready(function () {
+var categoryRepository = new CategoryRepository();
 
+$(document).ready(function () {
+	loadCategories();
 });
 
 $(".modalDialog span[name='btn-no']").click(function () {
@@ -7,6 +9,30 @@ $(".modalDialog span[name='btn-no']").click(function () {
 	$('.dialog-message').text('');
 	$('.dialog-message').hide();
 });
+
+function loadCategories() {
+	var categoriesHash = categoryRepository.getAll();
+	
+	var categories = categoriesHash.hash;	
+	if(categories != undefined) {
+		$.each(categories, function(id, category) {
+			addCategoryToGrid(category);
+		}); 
+	}
+}
+
+function addCategoryToGrid(category) {
+	var row = 
+	"<tr>" +
+		"<td><p>A</p></td>" +
+		"<td><img src='"+ category.image +"'></img></td>" +
+		"<td><p>"+ category.model +"</p></td>" +
+		"<td><a href='maintenance.html'><i title='Visualizar' class='fa fa-info-circle fa-2x'></i></a></td>" +
+	"</tr>";
+	
+	//Adicionando a linha na grid.
+	$('#master-grid').append(row);
+}
 
 function openModal(id) {
 	$(id).css('opacity', '1');
@@ -39,6 +65,13 @@ function getCurrentDate(days) {
     var year = currentDate.getFullYear();
     
 	return (day + "/" + month + "/" + year);
+}
+
+function getCurrentYear() {
+	var currentDate = new Date();
+	var year = currentDate.getFullYear();
+	
+	return year;
 }
 
 Date.prototype.addDays = function(days)

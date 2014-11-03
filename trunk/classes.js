@@ -71,6 +71,52 @@ CarRepository.prototype.returnCar = function(carId, mile) {
 	this.insert(car);
 }
 
+//CATEGORIA DE CARRO
+var Category = function(model, image) {
+	this.setModel(model);
+	this.setImage(image);
+}
+Category.prototype.setModel = function(model) {
+	this.model = model;
+}
+Category.prototype.setImage = function(image) {
+	this.image = image;
+}
+
+//REPOSITÓRIO DE CATEGORIA
+var CategoryRepository = function() {
+	this.storage = new Storage();
+	this.key = 'categories';
+}
+CategoryRepository.prototype.get = function(model) {
+	var categories = this.getAll();
+	var category = categories.get(model);
+	category.__proto__ = Category.prototype;
+	
+	return car;
+}
+CategoryRepository.prototype.getAll = function() {
+	var categories = this.storage.getObject(this.key);
+	
+	if(categories != undefined)
+		categories.__proto__ = HashMap.prototype;
+	else
+		categories = new HashMap();
+	
+	return categories;
+}
+CategoryRepository.prototype.insert = function(category) {	
+	var categories = this.getAll();			
+	
+	categories.add(category.model, category);
+	this.storage.setObject(this.key, categories);	
+}
+CategoryRepository.prototype.remove = function(model) {
+	var categories = this.getAll();
+	categories.remove(model);
+	this.storage.setObject(this.key, categories);
+}
+
 //CLIENTE
 var Client = function(name, number, cnh) {
 	this.setName(name);         
