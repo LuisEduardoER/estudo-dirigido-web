@@ -19,7 +19,7 @@ h3 {
 
 .page-data
 {
-    height: 5em;
+    height: 7em;
     padding: 7px;
     background: #D6D4C9;
 	border-bottom: 1px dashed black;
@@ -34,9 +34,9 @@ h3 {
 .add-region
 {
 	font-style: italic;
-	padding-left: 2%;
-	width: 60%;
 	float: left;
+	height: 70%;
+	padding-left: 2%;
 }
 
 .filter-region {
@@ -104,4 +104,20 @@ td {
 
 .col-3 {
 	width: 10%;
+}
+
+.input-area
+{
+	display: inline-block;
+	vertical-align: middle;
+	height: 100%;
+	width: 100%;
+}
+
+#input-image {
+	display: none;
+}
+
+#drag-add {
+	display: none;
 }

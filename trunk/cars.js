@@ -1,11 +1,13 @@
 var currentButtonId;
 var carRepository;
 var rentRepository;
+var categoryRepository;
 var hasErrors = false;
 
 $(document).ready(function () {	
 	carRepository = new CarRepository();
 	rentRepository = new RentRepository();
+	categoryRepository = new CategoryRepository();
 	
 	//Carregar todos os carros do Storage.
 	loadCars('all');
@@ -46,9 +48,29 @@ function addCarToGrid(car) {
 }
 
 function deleteCar(carId) {
+	var delCar = carRepository.get(carId);
+	
 	//Remover do Storage.
 	carRepository.remove(carId);
-
+	
+	//Verificar se existe algum modelo da categoria
+	var carsHash = carRepository.getAll();
+	
+	var hasCar = false;
+	var cars = carsHash.hash;	
+	if(cars != undefined) {
+		$.each(cars, function(register, car) {
+			//Achou um carro com o modelo
+			if(delCar.model == car.model)
+				hasCar = true;					
+		}); 
+	}
+	
+	//Remove a categoria caso não exista carro com o modelo.
+	if(!hasCar) {
+		categoryRepository.remove(delCar.model);
+	}
+		
 	//Removedo a linha referente ao carro selecionado.
 	$('#row_'+carId).remove();	
 }
@@ -180,7 +202,7 @@ $('#btn-insert-car').click(function () {
 		str[1]= "A placa precisa conter 3 letras e 4 números";
 	}
 	
-	if (str == {}) {
+	if (jQuery.isEmptyObject(str)) {
 		var car = new Car(model, year, register);
 	
 		carRepository.insert(car);
@@ -188,9 +210,20 @@ $('#btn-insert-car').click(function () {
 		
 		addCarToGrid(car);
 		
+		//Adicionar uma categoria caso não exista
+		var category = categoryRepository.get(car.model);
+		
+		if(category == undefined) {
+			category = new Category(car.model, $('#drag-img').attr('src'));
+			categoryRepository.insert(category);
+		}
+		
 		$('#txt-model').val('');
 		$('#txt-year').val('');
 		$('#txt-register').val('');
+		$('#drag-img').attr('src','');	
+		$('#drag-img').hide();
+		$('#input-image').val('');
 	} else {
 		addValidationError(str);
 	}
@@ -262,4 +295,8 @@ $("#dialog-return span[name='btn-yes']").click( function () {
 		closeModal('#dialog-return');
 		$('#return-endMile').val('');
 	}
+});
+
+$('#drag-add, #drag-img').click(function () {	
+	$('#input-image').trigger('click');
 });

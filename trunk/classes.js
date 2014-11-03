@@ -91,9 +91,11 @@ var CategoryRepository = function() {
 CategoryRepository.prototype.get = function(model) {
 	var categories = this.getAll();
 	var category = categories.get(model);
-	category.__proto__ = Category.prototype;
 	
-	return car;
+	if(category != undefined)
+		category.__proto__ = Category.prototype;
+	
+	return category;
 }
 CategoryRepository.prototype.getAll = function() {
 	var categories = this.storage.getObject(this.key);
