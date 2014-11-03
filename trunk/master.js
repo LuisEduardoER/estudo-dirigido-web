@@ -1,4 +1,5 @@
 var categoryRepository = new CategoryRepository();
+var currentCode;
 
 $(document).ready(function () {
 	loadCategories();
@@ -11,6 +12,7 @@ $(".modalDialog span[name='btn-no']").click(function () {
 });
 
 function loadCategories() {
+	currentCode = 65;
 	var categoriesHash = categoryRepository.getAll();
 	
 	var categories = categoriesHash.hash;	
@@ -22,9 +24,11 @@ function loadCategories() {
 }
 
 function addCategoryToGrid(category) {
+	var str = String.fromCharCode(currentCode++);
+	
 	var row = 
 	"<tr>" +
-		"<td><p>A</p></td>" +
+		"<td><p>"+ str +"</p></td>" +
 		"<td><img src='"+ category.image +"'></img></td>" +
 		"<td><p>"+ category.model +"</p></td>" +
 		"<td><a href='maintenance.html'><i title='Visualizar' class='fa fa-info-circle fa-2x'></i></a></td>" +
