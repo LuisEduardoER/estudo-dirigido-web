@@ -69,7 +69,7 @@ $('#btn-insert-client').click(function () {
 	var str = {};
 	
 	if (!re.test(name)) {
-		str[0] = "Nome inválido. Apenas letras são permitidas";
+		str[0] = "Nome inválido. Apenas letras são permitidas.";
 	}
 	re = /\d{11}/;
 	if (!re.test(number)) {

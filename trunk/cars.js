@@ -182,27 +182,37 @@ $("#confirmation-delete span[name='btn-yes']").click(function () {
 });
 
 $('#btn-insert-car').click(function () {	
+	//Limpa erros
 	$('#dialog-validation-info ul li').remove();	
 	//Inserindo um novo carro no Storage.
 	var model = $('#txt-model').val();
 	var year = $('#txt-year').val();
 	var register = $('#txt-register').val();
+	var imagem = $('#drag-img').attr('src');
 	
+	
+	//validações
 	
 	var re = /^\d{4}$/;
 	var str = {};
 	
+	if (model == "") {
+		str[0] = "O nome do modelo está vazio.";
+	}
 	if (!re.test(year)){
-		str[0] = "O ano precisa conter 4 dígitos";
+		str[1] = "O ano precisa conter 4 dígitos.";
 	}else if (year - 1990 < 0 || year > getCurrentYear() + 1) {
-		str[0] = "O ano do carro precisa estar nos limites 1990-2015";
+		str[1] = "O ano do carro precisa estar nos limites 1990-2015.";
 	}
 	re = /[A-Z]{3}\d{4}/;
 	if (!re.test(register)) {
-		str[1]= "A placa precisa conter 3 letras e 4 números";
+		str[2]= "A placa precisa conter 3 letras e 4 números.";
+	}
+	if ($.isEmptyObject(imagem)) {
+		str[3] = "Imagem do carro não enviada.";
 	}
 	
-	if (jQuery.isEmptyObject(str)) {
+	if ($.isEmptyObject(str)) {
 		var car = new Car(model, year, register);
 	
 		carRepository.insert(car);
