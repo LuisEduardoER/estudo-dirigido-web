@@ -160,36 +160,50 @@ $("#confirmation-delete span[name='btn-yes']").click(function () {
 });
 
 $('#btn-insert-car').click(function () {	
+	$('#dialog-validation-info ul li').remove();	
 	//Inserindo um novo carro no Storage.
 	var model = $('#txt-model').val();
 	var year = $('#txt-year').val();
 	var register = $('#txt-register').val();
 	
+	
 	var re = /^\d{4}$/;
-	var str = "";
+	var str = {};
 	
 	if (!re.test(year)){
-		str+="O ano precisa conter 4 números\n";
+		str[0] = "O ano precisa conter 4 dígitos";
+	}else if (year - 1990 < 0 || year > getCurrentYear() + 1) {
+		str[0] = "O ano do carro precisa estar nos limites 1990-2015";
 	}
 	re = /[A-Z]{3}\d{4}/;
 	if (!re.test(register)) {
-		str+="A placa precisa conter 3 letras e 4 números";
+		str[1]= "A placa precisa conter 3 letras e 4 números";
 	}
 	
-	console.log(str);
+	if (str == {}) {
+		var car = new Car(model, year, register);
 	
-
-	var car = new Car(model, year, register);
-	
-	carRepository.insert(car);
-	car = carRepository.get(car.register);
-	
-	addCarToGrid(car);
-	
-	$('#txt-model').val('');
-	$('#txt-year').val('');
-	$('#txt-register').val('');
+		carRepository.insert(car);
+		car = carRepository.get(car.register);
+		
+		addCarToGrid(car);
+		
+		$('#txt-model').val('');
+		$('#txt-year').val('');
+		$('#txt-register').val('');
+	} else {
+		addValidationError(str);
+	}
 });
+
+function addValidationError(str) {
+$.each(str, function(id, error) {
+   $('#dialog-validation-info ul').append("<li>"+ error +"</li>");
+  });
+  
+openModal('#dialog-validation-info');
+}
+	
 
 // Disparado quando algum botão da grid for pressionado.
 $('#cars-grid').on('click', '.grid-button', function(e) {
