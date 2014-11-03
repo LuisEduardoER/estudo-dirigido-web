@@ -80,3 +80,33 @@ Date.prototype.addDays = function(days)
     dat.setTime(dat.getTime() +  (days * 24 * 60 * 60 * 1000));
     return dat;
 }
+
+$(".drag-box").on({
+    mouseenter: function () {
+		var image = $('#drag-img');
+		
+		if(image.attr('src') == undefined || image.attr('src') == '') {		
+			$('.drag-box div').addClass('drag-box-area');
+			$('#drag-add').css('display','table-cell');
+		}
+    },
+    mouseleave: function () {
+        $('.drag-box div').removeClass('drag-box-area');
+		$('#drag-add').hide();
+    }
+});
+
+function onFileSelected(event) {
+  var selectedFile = event.target.files[0];
+  var reader = new FileReader();
+
+  var imgtag = document.getElementById("drag-img");
+  imgtag.title = selectedFile.name;
+
+  reader.onload = function(event) {
+    imgtag.src = event.target.result;
+	$('#drag-img').show();
+  };
+
+  reader.readAsDataURL(selectedFile);
+}

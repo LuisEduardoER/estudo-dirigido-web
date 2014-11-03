@@ -32,10 +32,17 @@
 		<section class="page-data">
 			<div class="add-region">
 				<h3>Adicionar Carro</h3>				
-				<div>
+				<div class="input-area">
 					<input id="txt-model" type="text" placeholder="Modelo" />
 					<input id="txt-year" type="text" placeholder="Ano" />
 					<input id="txt-register" type="text" placeholder="Placa" />
+					<div class="drag-box input-area">
+						<div>
+							<i id="drag-add" class="fa fa-plus-circle drag-box-add"></i>
+							<img id="drag-img"></img>
+						</div>
+					</div>
+					<input id="input-image" type="file" onchange="onFileSelected(event)" />
 					<span id="btn-insert-car" class="button">Salvar</span>
 				</div>
 			</div>
@@ -80,9 +87,7 @@
 	<div id="dialog-validation-info" class="modalDialog">
 		<div>				
 			<h3>Erro</h3>
-			<p>
 			<ul></ul>
-			</p>
 			<div class="container">
 				<div class="row">					
 					<span name="btn-no" class="button">Ok</span>
