@@ -364,3 +364,8 @@ sup {
 	color: #2c3e50;
 	cursor: pointer;
 }	
+
+#googleMap {
+	width: 100%;
+	height: 60%;
+}
