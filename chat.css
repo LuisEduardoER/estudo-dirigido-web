@@ -1,0 +1,27 @@
+.input-area
+{
+	display: inline-block;
+	vertical-align: middle;
+	height: auto;
+	width: 100%;
+}
+
+.add-region {
+    float: left;
+    font-style: italic;
+    height: 70%;
+    padding-left: 2%;
+}
+
+.page-data {
+	height: 10em;
+}
+
+.message-region {
+	width: 30%;
+	float: right;
+}
+
+textarea {
+	resize: none;
+}
