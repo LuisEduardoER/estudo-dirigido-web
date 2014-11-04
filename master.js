@@ -9,6 +9,7 @@ $(".modalDialog span[name='btn-no']").click(function () {
 	closeModal('.modalDialog');	
 	$('.dialog-message').text('');
 	$('.dialog-message').hide();
+	$('textarea').val('');
 });
 
 function loadCategories() {

@@ -121,3 +121,8 @@ td {
 #drag-add {
 	display: none;
 }
+
+textarea {
+	resize: none;
+	width: 100%;
+}

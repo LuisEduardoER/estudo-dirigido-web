@@ -75,12 +75,16 @@ CarRepository.prototype.returnCar = function(carId, mile) {
 var Category = function(model, image) {
 	this.setModel(model);
 	this.setImage(image);
+	this.setInfo('');
 }
 Category.prototype.setModel = function(model) {
 	this.model = model;
 }
 Category.prototype.setImage = function(image) {
 	this.image = image;
+}
+Category.prototype.setInfo = function(info) {
+	this.info = info;
 }
 
 //REPOSITÓRIO DE CATEGORIA
