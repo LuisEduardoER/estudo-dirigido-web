@@ -25,14 +25,14 @@ function loadCategories() {
 }
 
 function addCategoryToGrid(category) {
-	var str = String.fromCharCode(currentCode++);
+	var str = String.fromCharCode(currentCode++);	
 	
 	var row = 
 	"<tr>" +
 		"<td><p>"+ str +"</p></td>" +
 		"<td><img src='"+ category.image +"'></img></td>" +
 		"<td><p>"+ category.model +"</p></td>" +
-		"<td><a href='maintenance.html'><i title='Visualizar' class='fa fa-info-circle fa-2x'></i></a></td>" +
+		"<td><a href='chat.html?model="+ category.model +"'><i title='Visualizar' class='fa fa-info-circle fa-2x'></i></a></td>" +
 	"</tr>";
 	
 	//Adicionando a linha na grid.
