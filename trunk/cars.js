@@ -3,6 +3,7 @@ var carRepository;
 var rentRepository;
 var categoryRepository;
 var hasErrors = false;
+var insertedCategory;
 
 $(document).ready(function () {	
 	carRepository = new CarRepository();
@@ -172,6 +173,12 @@ function fillReturnDialog(carId) {
 	$('#return-register').text($('#reg_'+carId).text());
 }
 
+function saveCategoryInfo(info) {
+	insertedCategory.setInfo(info);
+	categoryRepository.insert(insertedCategory);
+	insertedCategory = undefined;
+}
+
 //EVENTOS
 $("#confirmation-delete span[name='btn-yes']").click(function () {
 	closeModal('#confirmation-delete');
@@ -206,7 +213,7 @@ $('#btn-insert-car').click(function () {
 	}
 	re = /[A-Z]{3}\d{4}/;
 	if (!re.test(register)) {
-		str[2]= "A placa precisa conter 3 letras e 4 números.";
+		str[2]= "A placa precisa conter 3 letras maiúsculas e 4 números.";
 	}
 	if ($.isEmptyObject(imagem)) {
 		str[3] = "Imagem do carro não enviada.";
@@ -225,8 +232,11 @@ $('#btn-insert-car').click(function () {
 		
 		if(category == undefined) {
 			category = new Category(car.model, $('#drag-img').attr('src'));
-			categoryRepository.insert(category);
+			categoryRepository.insert(category);					
 		}
+		insertedCategory = category;
+		$('#txt-optional').val(insertedCategory.info);
+		openModal('#dialog-add-optionals');
 		
 		$('#txt-model').val('');
 		$('#txt-year').val('');
@@ -294,6 +304,19 @@ $("#dialog-rent span[name='btn-yes']").click( function () {
 		closeModal('#dialog-rent');
 		$('#sel-rent').val(0);
 		$('#sel-rent-days').val('');
+	}
+});
+
+$("#dialog-add-optionals span[name='btn-yes']").click( function () {
+	var info = $('#txt-optional').val();
+	
+	if(info == '') {
+		$('#optional-message').show();
+	}
+	else {	
+		saveCategoryInfo(info);
+		closeModal('#dialog-add-optionals');
+		$('#txt-optional').val('');
 	}
 });
 
