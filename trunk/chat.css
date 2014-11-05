@@ -22,6 +22,145 @@
 	float: right;
 }
 
+.message-region div {
+	width: 80%;
+}
+
 textarea {
 	resize: none;
+	width: 100%;
+	margin-top: 10px;
+}
+
+.message-region  .button{
+	float: right;
+	margin-right: 0;
+}
+
+.message-region input {
+	width: 100%;
+}
+
+.chat-area {
+    height: auto;
+}
+
+.chat-area-left {
+    float: left;
+    height: 100%;
+    padding-left: 2%;
+    width: 28%;
+}
+
+.chat-area  h3{
+	color: #2c3e50;
+}
+
+.chat-area-right {
+    float: right;
+    height: 100%;
+    padding-left: 2%;
+    width: 68%;
+}
+
+.participants-area {
+    background: none repeat scroll 0 0 #dedede;
+    border-radius: 10px;
+    color: #333;
+    margin: 0;
+    padding: 15px;
+    position: relative;
+	width: 60%;
+}
+
+.participants-area:after {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: transparent transparent #dedede;
+    border-image: none;
+    border-style: solid;
+    border-width: 15px;
+    content: "";
+    display: block;
+    left: 50px;
+    position: absolute;
+    top: -30px;
+    width: 0;
+}
+
+.participants-area p {	
+	font-weight: bold;
+}
+
+.participants-area i {
+	padding-right: 10px;
+	color: #2c3e50;
+}
+
+.bubble {
+    background: none repeat scroll 0 0 #dedede;
+    border-radius: 5px;
+    height: auto;
+    margin-bottom: 10px;
+    min-height: 50px;
+    padding: 10px 30px;
+    position: relative;
+    width: 438px;
+}
+
+.bubble.right {
+	background: none repeat scroll 0 0 #2c3e50;
+	color: #fff;
+}
+
+
+.bubble.left:after {
+	content: "";
+	position: absolute;
+	top: 20px;
+	left: -22px;
+	border-style: solid;
+	border-width: 15px 22px 15px 0;
+	border-color: transparent #DEDEDE;
+	display: block;
+	width: 0;
+	z-index: 1;
+}
+
+.bubble.right:after {
+    content: "";
+    position: absolute;
+    top: 20px;
+    right: -22;
+    border-style: solid;
+    border-width: 15px 0 15px 22px;
+    border-color: transparent #2c3e50;
+    display: block;
+    width: 0;
+    z-index: 1;
+}
+
+.bubble h4{
+	margin: 0;
+}
+
+.bubble p{
+	margin: 5px;
+	word-wrap: break-word;
+}
+
+.bubble .row {
+	width: 100%;
+}
+
+.message-user {
+	float: left;
+	font-weight: bold;
+}
+
+.message-date {
+	float: right;
+	font-size: 9pt;
 }
