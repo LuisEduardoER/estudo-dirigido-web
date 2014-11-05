@@ -71,6 +71,7 @@ textarea {
     padding: 15px;
     position: relative;
 	width: 60%;
+	display: none;
 }
 
 .participants-area:after {

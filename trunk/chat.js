@@ -86,6 +86,7 @@ function addParticipantToGrid(user) {
 	
 		$('#num-users').text(users.length);
 		$('.participants-area').append("<p><i class='fa fa-user'></i>"+ user +"</p>");
+		$('.participants-area').show();
 	}
 }
 
