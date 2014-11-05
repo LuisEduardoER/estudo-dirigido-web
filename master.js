@@ -72,6 +72,18 @@ function getCurrentDate(days) {
 	return (day + "/" + month + "/" + year);
 }
 
+function getCurrentDateTime() {
+	var currentDate = new Date();
+	var day = currentDate.getDate();
+    var month = currentDate.getMonth() + 1;
+    var year = currentDate.getFullYear();
+	var hour = currentDate.getHours();
+	var min = currentDate.getMinutes();
+    
+	return (day + "/" + month + "/" + year + " às " + hour + ":" + min);
+	
+}
+
 function getCurrentYear() {
 	var currentDate = new Date();
 	var year = currentDate.getFullYear();

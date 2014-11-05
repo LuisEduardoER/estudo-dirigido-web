@@ -71,13 +71,14 @@ article:not(.art-maintenance)
 	src: local('Lato Bold Italic'), local('Lato-BoldItalic'), url(http://fonts.gstatic.com/s/lato/v11/HkF_qI1x_noxlxhrhMQYED8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
 }
 
-input[placeholder] {
+input[placeholder], textarea[placeholder] {
 	color: gray;
 }
 
-input
+input, textarea
 {
 	font-family: 'Lato';
+	font-size: 10pt;
 }
 
 label {

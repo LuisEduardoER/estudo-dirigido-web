@@ -7,8 +7,7 @@
 		
 	<script type="text/javascript" src="jquery-2.1.0.min.js"></script>
 	<script type="text/javascript" src="classes.js"></script>
-	<script type="text/javascript" src="master.js"></script>
-	<script type="text/javascript" src="chat.js"></script>
+	<script type="text/javascript" src="master.js"></script>	
 </head>
 <body>	
 	<nav class="container">
@@ -41,14 +40,27 @@
 				</div>
 			</div>	
 			<div class="message-region">
-				<h3>Mensagem</h3>
+				<h3>Enviar Mensagem</h3>
 				<div>
-					<textarea id="txt-optional" rows="6" cols="50"></textarea>
+					<input id="txt-user" type="text" placeholder="Informe seu nome" cols="50"></input>
+					<textarea id="txt-message" rows="2" cols="50" placeholder="Escreva sua mensagem e clique em Enviar..."></textarea>
+					<br />
+					<span id="btn-send" class="button">Enviar</span>
 				</div>
 			</div>
 		</section>
-		<section class="grid-container">						
+		<section class="chat-area">	
+			<div class="chat-area-left">
+				<h3>Participantes [<i id="num-users">0</i>]</h3>
+					<blockquote class="participants-area"></blockquote>
+			</div>
+			<div class="chat-area-right">
+				<h3>Mensagens</h3>
+				<div id="bubles"></div>
+			</div>
 		</section>		
 	</article>
+	
+	<script type="text/javascript" src="chat.js"></script>
 </body>
 <html>
