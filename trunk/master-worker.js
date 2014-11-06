@@ -120,7 +120,7 @@ function onFileSelected(event) {
 		var imgData = {};
 		imgData[0] = event.target.files[0];
 		imgData[1] = imgtag;
-		worker.postMessage(imgData);
+		webWorker.postMessage(imgData);
 	}
   
 		
