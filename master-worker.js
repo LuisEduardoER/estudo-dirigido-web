@@ -109,19 +109,15 @@ function onFileSelected(event) {
 		var imgtag = document.getElementById("drag-img");
 		imgtag.title = event.target.files[0].name;
 		
-		if (worker) {
-		  worker.addEventListener('message', function(e) {
+		var handle = new function(e) {
 			imgtag.src = e.data[0].target.result;
 			$('#drag-img').show();
 			
 			e.data[1].readAsDataURL(event.target.files[0]);
-		  });    
-		}
-		var imgData = {};
-		imgData[0] = event.target.files[0];
-		imgData[1] = imgtag;
-		webWorker.postMessage(imgData);
-	}
-  
+		};
 		
+		webWorker.addEventListener("message", handle, false); 
+	}
+	
+	webWorker.postMessage('');
 }
