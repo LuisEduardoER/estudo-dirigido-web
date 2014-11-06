@@ -114,7 +114,7 @@ function onFileSelected(event) {
 			imgtag.src = e.data[0].target.result;
 			$('#drag-img').show();
 			
-			e.data[1].readAsDataURL(selectedFile);
+			e.data[1].readAsDataURL(event.target.files[0]);
 		  });    
 		}
 		var imgData = {};
