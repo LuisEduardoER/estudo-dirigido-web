@@ -1,6 +1,6 @@
 self.addEventListener("message", messageHandler, false);
 
-function messageHandler(event) {
+function messageHandler(e) {
   var reader = new FileReader();
   
   reader.onload = function(event) {
@@ -8,6 +8,5 @@ function messageHandler(event) {
 	result[0] = event;
 	result[1] = reader;
 	self.postMessage(result);
-	self.close();
-	}
+  }
 };
