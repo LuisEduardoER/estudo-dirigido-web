@@ -70,6 +70,9 @@ CarRepository.prototype.returnCar = function(carId, mile) {
 	car.setOnRent(false);
 	this.insert(car);
 }
+CarRepository.prototype.getBackup = function() {
+	return this.storage.getBackup(this.key);
+}
 
 //CATEGORIA DE CARRO
 var Category = function(model, image) {
@@ -122,6 +125,9 @@ CategoryRepository.prototype.remove = function(model) {
 	categories.remove(model);
 	this.storage.setObject(this.key, categories);
 }
+CategoryRepository.prototype.getBackup = function() {
+	return this.storage.getBackup(this.key);
+}
 
 //CLIENTE
 var Client = function(name, number, cnh) {
@@ -173,6 +179,9 @@ ClientRepository.prototype.remove = function(clientId) {
 }
 ClientRepository.prototype.clear = function() {
 	this.storage.removeObject(this.key);
+}
+ClientRepository.prototype.getBackup = function() {
+	return this.storage.getBackup(this.key);
 }
 
 //ALUGUEL
@@ -238,6 +247,9 @@ RentRepository.prototype.remove = function(rentId) {
 RentRepository.prototype.clear = function() {
 	this.storage.removeObject(this.key);
 }
+RentRepository.prototype.getBackup = function() {
+	return this.storage.getBackup(this.key);
+}
 
 //ARMAZENAMENTO
 var Storage = function() {}
@@ -251,6 +263,9 @@ Storage.prototype.getObject = function(key) {
 }
 Storage.prototype.removeObject = function(key) {
     localStorage.removeItem(key);
+}
+Storage.prototype.getBackup = function(key) {
+    return localStorage.getItem(key);
 }
 
 //HASH MAP
