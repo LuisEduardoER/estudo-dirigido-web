@@ -1,4 +1,7 @@
 var categoryRepository = new CategoryRepository();
+var carRep = new CarRepository();
+var clientRep = new ClientRepository();
+var rentRep = new RentRepository();
 var currentCode;
 
 $(document).ready(function () {
@@ -127,3 +130,72 @@ function onFileSelected(event) {
 
   reader.readAsDataURL(selectedFile);
 }
+
+function destroyClickedElement(event)
+{
+	document.body.removeChild(event.target);
+}
+
+function getEntityBackup(type) {
+	var entityHash;
+	var fileName = '';
+	
+	switch(type) {
+		case 'cars':
+			fileName = 'Backup_Carros';
+			entityHash = carRep.getAll();
+			break;
+		case 'clients':
+			fileName = 'Backup_Clientes';
+			entityHash = clientRep.getAll();
+			break;
+		case  'rents':
+			fileName = 'Backup_Alugueis';
+			entityHash = rentRep.getAll();
+			break;
+		case 'categories':
+			fileName = 'Backup_Categorias';
+			entityHash = categoryRepository.getAll();
+			break;
+	}
+	
+	var fileText = '';
+	var entities = entityHash.hash;	
+	if(entities != undefined) {
+		$.each(entities, function(id, entity) {
+			fileText += JSON.stringify(entity) + '\r\n';
+		}); 
+	}	
+	
+	return { fileName: fileName, fileText: fileText };
+}
+
+$("#dialog-backup span[name='btn-yes']").click( function () {
+	var type = $("input[name='backup']:checked").val();
+	var data = getEntityBackup(type);
+	
+	var textFileAsBlob = new Blob([data.fileText], {type:'text/json'});
+	var fileNameToSaveAs = data.fileName;
+
+	var downloadLink = document.createElement("a");
+	downloadLink.download = fileNameToSaveAs;
+	downloadLink.innerHTML = "Download File";
+	if (window.webkitURL != null)
+	{
+		downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+	}
+	else
+	{
+		downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+		downloadLink.onclick = destroyClickedElement;
+		downloadLink.style.display = "none";
+		document.body.appendChild(downloadLink);
+	}
+
+	downloadLink.click();	
+	closeModal('#dialog-backup');
+});
+
+$('#btn-backup').click(function () {
+	openModal('#dialog-backup');	
+});

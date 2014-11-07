@@ -105,19 +105,24 @@ function onFileSelected(event) {
 	var webWorker;
 	if (typeof(Worker) != "undefined") {
 		webWorker = new Worker("worker.js");
-	
-		var imgtag = document.getElementById("drag-img");
-		imgtag.title = event.target.files[0].name;
 		
-		var handle = new function(e) {
-			imgtag.src = e.data[0].target.result;
-			$('#drag-img').show();
-			
-			e.data[1].readAsDataURL(event.target.files[0]);
+		webWorker.onmessage = function (oEvent) {
+		  console.log("Called back by the worker!\n");
 		};
 		
-		webWorker.addEventListener("message", handle, false); 
+		webWorker.postMessage('post');
+		// var imgtag = document.getElementById("drag-img");
+		// imgtag.title = event.target.files[0].name;		
+		
+		// webWorker.addEventListener("message", handle, false); 
+		// webWorker.postMessage(imgtag);
 	}
 	
-	webWorker.postMessage('');
 }
+
+function handle(e) {
+	console.log('voltou');
+	imgtag.src = e.data[0].target.result;
+	$('#drag-img').show();	
+	e.data[1].readAsDataURL(event.target.files[0]);
+};
